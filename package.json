@@ -1,25 +1,25 @@
 {
-  "name": "vscode-nelfe",
+  "name": "nelfe",
   "displayName": "nelfe",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "jasonHzq",
   "engines": {
-    "vscode": "^1.20.0"
+    "vscode": "^1.19.0"
   },
   "categories": ["Other", "Snippets"],
-  "activationEvents": ["onCommand:swag.addAction"],
+  "activationEvents": ["onCommand:nelfe.addAction"],
   "main": "./out/extension",
   "contributes": {
     "commands": [
       {
-        "command": "swag.addAction",
+        "command": "nelfe.addAction",
         "title": "add action"
       }
     ],
     "keybindings": [
       {
-        "command": "swag.addAction",
+        "command": "nelfe.addAction",
         "key": "cmd+ctrl+a",
         "mac": "cmd+ctrl+a"
       }
