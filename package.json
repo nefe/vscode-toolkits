@@ -2,7 +2,7 @@
   "name": "nelfe",
   "displayName": "nelfe",
   "description": "",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "publisher": "jasonHzq",
   "engines": {
     "vscode": "^1.19.0"
@@ -47,5 +47,8 @@
     "vscode": "^1.1.6",
     "@types/node": "^7.0.43",
     "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "typescript": "^2.6.2"
   }
 }
