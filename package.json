@@ -1,20 +1,33 @@
 {
-  "name": "nelfe",
-  "displayName": "nelfe",
+  "name": "nelfe-toolkits",
+  "displayName": "nelfe-toolkits",
   "description": "",
-  "version": "0.0.4",
+  "version": "0.0.2",
   "publisher": "jasonHzq",
   "engines": {
     "vscode": "^1.19.0"
   },
   "categories": ["Other", "Snippets"],
-  "activationEvents": ["onCommand:nelfe.addAction"],
+  "activationEvents": [
+    "onCommand:nelfe.addAction",
+    "onCommand:nelfe.findI18N",
+    "onLanguage:typescript"
+  ],
   "main": "./out/extension",
+  "capabilities": {
+    "codeLensProvider": {
+      "resolveProvider": "true"
+    }
+  },
   "contributes": {
     "commands": [
       {
         "command": "nelfe.addAction",
         "title": "add action"
+      },
+      {
+        "command": "nelfe.findI18N",
+        "title": "find i18n cn"
       }
     ],
     "keybindings": [
@@ -22,6 +35,11 @@
         "command": "nelfe.addAction",
         "key": "cmd+ctrl+a",
         "mac": "cmd+ctrl+a"
+      },
+      {
+        "command": "nelfe.findI18N",
+        "key": "cmd+ctrl+f",
+        "mac": "cmd+ctrl+f"
       }
     ],
     "snippets": [
@@ -43,12 +61,13 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "typescript": "^2.6.1",
-    "vscode": "^1.1.6",
+    "@types/mocha": "^2.2.42",
     "@types/node": "^7.0.43",
-    "@types/mocha": "^2.2.42"
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6"
   },
   "dependencies": {
+    "ts-node": "^5.0.1",
     "typescript": "^2.6.2"
   }
 }
