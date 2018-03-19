@@ -10,7 +10,7 @@ function get(map: any, fields: string[]) {
       return map;
     }
 
-    throw new Error(map + "withod fields");
+    return "";
   }
 
   const [field, ...rest] = fields;
@@ -21,6 +21,30 @@ function get(map: any, fields: string[]) {
 
   return "";
 }
+
+class Cache {
+  memories = [] as Array<{ code: string; positions: Position[] }>;
+  addCache(code: string, positions: Position[]) {
+    this.memories.push({
+      code,
+      positions
+    });
+
+    if (this.memories.length > 8) {
+      this.memories.shift();
+    }
+  }
+  getPositionsByCode(code: string) {
+    const mem = this.memories.find(mem => mem.code === code);
+    if (mem && mem.positions) {
+      return mem.positions;
+    }
+
+    return false;
+  }
+}
+
+const cache = new Cache();
 
 function getI18NText(node: ts.PropertyAccessExpression, exps: string[] = []) {
   const name: ts.Identifier = node.name;
@@ -43,7 +67,12 @@ export class Position {
   code: string;
 }
 
-export function findI18NPositions(code: string, cn: string) {
+export function findI18NPositions(code: string) {
+  const cachedPoses = cache.getPositionsByCode(code);
+  if (cachedPoses) {
+    return cachedPoses;
+  }
+
   const workspace = vscode.workspace.rootPath;
   const I18N = require(path.resolve(workspace, "langs/zh_CN/index.ts")).default;
   const ast = ts.createSourceFile(
@@ -59,6 +88,37 @@ export function findI18NPositions(code: string, cn: string) {
 
   function processNode(node: ts.Node) {
     switch (node.kind) {
+      case ts.SyntaxKind.CallExpression: {
+        const { expression } = node as ts.CallExpression;
+        const args = (node as ts.CallExpression).arguments;
+
+        if (expression.kind === ts.SyntaxKind.PropertyAccessExpression) {
+          const {
+            expression: main,
+            name: method
+          } = expression as ts.PropertyAccessExpression;
+
+          if (
+            (main as ts.Identifier).text === "I18N" &&
+            method &&
+            method.text === "get"
+          ) {
+            if (args[0] && (args[0] as ts.StringLiteral).text) {
+              const exps = (args[0] as ts.StringLiteral).text.split(".");
+              const transformedCn = get(I18N, exps) as string;
+
+              if (transformedCn) {
+                const position = new Position();
+
+                position.cn = transformedCn;
+                position.start = main.pos;
+                position.code = ["I18N", ...exps].join(".");
+                positions.push(position);
+              }
+            }
+          }
+        }
+      }
       case ts.SyntaxKind.PropertyAccessExpression: {
         const {
           expression,
@@ -72,7 +132,7 @@ export function findI18NPositions(code: string, cn: string) {
 
           const transformedCn = get(I18N, exps) as string;
 
-          if (transformedCn.includes(cn)) {
+          if (transformedCn) {
             const position = new Position();
 
             position.cn = transformedCn;
@@ -87,5 +147,6 @@ export function findI18NPositions(code: string, cn: string) {
     ts.forEachChild(node, cNode => processNode(cNode as any));
   }
 
+  cache.addCache(code, positions);
   return positions;
 }

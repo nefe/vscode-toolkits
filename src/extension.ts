@@ -19,14 +19,15 @@ function transformPosition(pos: Position, editorText: string) {
 class CodeLensProvider implements vscode.CodeLensProvider {
   public provideCodeLenses(document: vscode.TextDocument) {
     const code = document.getText();
-    const positions = findI18NPositions(code, "");
+    const positions = findI18NPositions(code);
     const codeLens = [] as vscode.CodeLens[];
 
     return positions.map(pos => {
       const range = transformPosition(pos, code);
       return new vscode.CodeLens(range, {
         title: pos.cn,
-        command: ""
+        command: "",
+        tooltip: pos.cn
       });
     });
   }
@@ -45,36 +46,37 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function findI18N() {
+  const document = vscode.window.activeTextEditor.document;
+  const code = document.getText();
+  const positions = findI18NPositions(code);
+
   vscode.window
-    .showInputBox({
-      ignoreFocusOut: true,
-      prompt: "输入中文进行搜索，支持I18N",
-      placeHolder: "请输入中文"
-    })
-    .then(input => {
-      const document = vscode.window.activeTextEditor.document;
-      const code = document.getText();
+    .showQuickPick(positions.map(pos => `${pos.cn}  ${pos.code}`))
+    .then(item => {
+      const foundPos = positions.find(pos => `${pos.cn}  ${pos.code}` === item);
 
-      const I18NTextPositions = findI18NPositions(code, input);
-
-      vscode.window
-        .showQuickPick(I18NTextPositions.map(pos => `${pos.cn}  ${pos.code}`))
-        .then(item => {
-          const foundPos = I18NTextPositions.find(
-            pos => `${pos.cn}  ${pos.code}` === item
-          );
-
-          const range = transformPosition(foundPos, code);
-          vscode.window.activeTextEditor.selection = new vscode.Selection(
-            range.start,
-            range.end
-          );
-          vscode.window.activeTextEditor.revealRange(
-            range,
-            vscode.TextEditorRevealType.InCenter
-          );
-        });
+      const range = transformPosition(foundPos, code);
+      vscode.window.activeTextEditor.selection = new vscode.Selection(
+        range.start,
+        range.end
+      );
+      vscode.window.activeTextEditor.revealRange(
+        range,
+        vscode.TextEditorRevealType.InCenter
+      );
     });
+
+  // vscode.window
+  //   .showInputBox({
+  //     ignoreFocusOut: true,
+  //     prompt: "输入中文进行搜索，支持I18N",
+  //     placeHolder: "请输入中文"
+  //   })
+  //   .then(input => {
+
+  //     const I18NTextPositions = findI18NPositions(code, input);
+
+  //   });
 }
 
 export function addAction() {
