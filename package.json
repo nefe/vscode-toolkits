@@ -2,7 +2,7 @@
   "name": "nelfe-toolkits",
   "displayName": "nelfe-toolkits",
   "description": "",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "jasonHzq",
   "engines": {
     "vscode": "^1.19.0"

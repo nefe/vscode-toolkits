@@ -118,6 +118,7 @@ export function findI18NPositions(code: string) {
             }
           }
         }
+        break;
       }
       case ts.SyntaxKind.PropertyAccessExpression: {
         const {
@@ -141,6 +142,7 @@ export function findI18NPositions(code: string) {
             positions.push(position);
           }
         }
+        break;
       }
     }
 
