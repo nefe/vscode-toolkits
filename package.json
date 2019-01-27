@@ -11,6 +11,7 @@
     "Other",
     "Snippets"
   ],
+  "repository": "git@github.com:nefe/vscode-toolkits.git",
   "activationEvents": [
     "*",
     "onCommand:nefe.addAction",
