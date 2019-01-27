@@ -1,0 +1,86 @@
+{
+  "name": "nefe-tools",
+  "displayName": "nefe-tools",
+  "description": "",
+  "version": "0.1.0",
+  "publisher": "jasonHzq",
+  "engines": {
+    "vscode": "^1.19.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "*",
+    "onCommand:nefe.addAction",
+    "onCommand:nefe.findI18N",
+    "onLanguage:typescript"
+  ],
+  "main": "./out/extension",
+  "capabilities": {
+    "codeLensProvider": {
+      "resolveProvider": "true"
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "nefe.addAction",
+        "title": "add action"
+      },
+      {
+        "command": "nefe.analysis",
+        "title": "calculate your code"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "nefe.analysis"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "nefe.addAction",
+        "key": "cmd+ctrl+a",
+        "mac": "cmd+ctrl+a"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/redux.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/redux.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/react.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.4",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "typescript": "^2.6.1",
+    "vscode": "1.1.18"
+  },
+  "dependencies": {
+    "find-in-files": "^0.5.0",
+    "fs-extra": "^7.0.0",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.6.2"
+  }
+}
