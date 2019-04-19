@@ -1,0 +1,26 @@
+{
+  "yark - 将React封装为Angular组件": {
+    "prefix": "yark",
+    "body": [
+      "/**",
+      " * @author ${1:author}",
+      " * @description ${2:description}",
+      " */",
+      "",
+      "import { Component, Input } from '@angular/core';",
+      "import { ReactForAngularAgent } from '@ali/yark';",
+      "",
+      "import { ${4:react class} } from '${3:react lib}';",
+      "",
+      "@Component({",
+      "  selector: '${5:selector}',",
+      "  template: ``",
+      "})",
+      "export class ${4:react class}Component extends ReactForAngularAgent {",
+      "  reactComponentClass: any = ${4:react class};",
+      "",
+      "  @Input() ${6:property};",
+      "}"
+    ]
+  }
+}
