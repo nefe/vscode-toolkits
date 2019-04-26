@@ -49,7 +49,7 @@
       "): InitialState {",
       "  switch (action.type) {",
       "    default: {",
-      "      return state;",
+      "      return AsyncTuple.handleAll(prefix, state, action);",
       "    }",
       "  }",
       "}",

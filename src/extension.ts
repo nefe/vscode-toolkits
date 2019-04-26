@@ -13,8 +13,7 @@ export function addAction() {
   vscode.window
     .showInputBox({
       ignoreFocusOut: true,
-      prompt:
-        'generate action code, prompt: actionCreator name#payload type#field name#init value',
+      prompt: 'action名 # payload 类型 # 属性名 # 初始值',
       placeHolder: 'actionCreator#payload_type#field_name#init'
     })
     .then(input => {
