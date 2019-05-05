@@ -166,7 +166,7 @@ export function addFetchReducer(code: string, meta) {
         const { name, members } = <ts.ClassDeclaration>node;
 
         if (name && name.text === 'InitialState') {
-          let text = `${attrName} = API.${modName}.${interName}.init;`;
+          let text = `${attrName} = new AsyncTuple<API.${modName}.${interName}.init>;`;
 
           replacements.push({
             begin: members.end,
