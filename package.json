@@ -2,7 +2,7 @@
   "name": "nefe-tools",
   "displayName": "nefe-tools",
   "description": "",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "jasonHzq",
   "engines": {
     "vscode": "^1.19.0"
