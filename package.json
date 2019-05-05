@@ -31,6 +31,10 @@
         "title": "add action"
       },
       {
+        "command": "nefe.addFetchAction",
+        "title": "add fetch action"
+      },
+      {
         "command": "nefe.analysis",
         "title": "calculate your code"
       }
@@ -47,6 +51,11 @@
         "command": "nefe.addAction",
         "key": "cmd+ctrl+a",
         "mac": "cmd+ctrl+a"
+      },
+      {
+        "command": "nefe.addFetchAction",
+        "key": "cmd+ctrl+k",
+        "mac": "cmd+ctrl+k"
       }
     ],
     "snippets": [
