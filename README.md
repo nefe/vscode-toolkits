@@ -2,11 +2,14 @@
 
 ## privide snippets for [iron-redux](https://github.com/nefe/iron-redux)
 
-snippets prefix: `sredux`.
+snippets prefix: `sredux`. for iron-redux Redux File
+snippets prefix: `sreact`. for iron-redux React View File
 
 ## auto add all code of add a action in iron-redux
 
-cmd+ctrl+a
+cmd+ctrl+a: dynamic add an plain action in Redux File
+
+cmd+ctrl+k: dynamic add an fetch action with Pont in Redux File
 
 input your actionCreator name, action payload Type, state field name and initial value, and join with `#`, toolkits will auto generate all the types, actions, reducers and state code for you!
 
