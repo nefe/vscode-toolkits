@@ -3,6 +3,7 @@
 ## privide snippets for [iron-redux](https://github.com/nefe/iron-redux)
 
 snippets prefix: `sredux`. for iron-redux Redux File
+
 snippets prefix: `sreact`. for iron-redux React View File
 
 ## auto add all code of add a action in iron-redux
