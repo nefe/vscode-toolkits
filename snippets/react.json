@@ -140,5 +140,28 @@
       "export { $3 };"
     ],
     "description": "带 Form 的 react view 模板代码."
+  },
+  "generate hooks component": {
+    "prefix": "shooks-react",
+    "body": [
+      "/**",
+      " * @author $1",
+      " * @description $2",
+      " */",
+      "import * as React from 'react';",
+      "",
+      "export class ${3}Props {",
+      "}",
+      "",
+      "export const ${3}: React.FC<${3}Props> = (props) => {",
+      "  return <div></div>;",
+      "};",
+      "",
+      "${3}.defaultProps = new ${3}Props();"
+    ]
+  },
+  "generate hooks": {
+    "prefix": "shooks",
+    "body": ["const [${1}, ${2}] = React.useState(${3});"]
   }
 }

@@ -15,7 +15,6 @@
   "activationEvents": [
     "*",
     "onCommand:nefe.addAction",
-    "onCommand:nefe.findI18N",
     "onLanguage:typescript"
   ],
   "main": "./out/extension",
